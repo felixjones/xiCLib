@@ -20,7 +20,16 @@
 
 	#if defined( TARGET_OS_MAC ) && defined( __LP64__ )
 		#define __OS_X__
-        #define __X64__
+
+		#define __X64__
+	#elif defined( TARGET_OS_IPHONE )
+		#define __IOS__
+
+		#if defined( __LP64__ )
+			#define __X64__
+		#elif !defined( __LP64__ )
+			#define __X32__
+		#endif
 	#endif
 #endif
 
@@ -34,7 +43,7 @@
 	#endif
 #endif
 
-#if defined( __LINUX__ ) || defined( __OS_X__ )
+#if defined( __LINUX__ ) || defined( __OS_X__ ) || defined( __IOS__ )
 	#define __POSIX__
 #elif defined( __WINDOWS__ )
 	#define	__WIN_API__
