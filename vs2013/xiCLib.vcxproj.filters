@@ -9,9 +9,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\include\boolean.h">
-      <Filter>include</Filter>
-    </ClInclude>
     <ClInclude Include="..\include\Matrix.h">
       <Filter>include</Filter>
     </ClInclude>

@@ -1,9 +1,15 @@
 #include "Maths.h"
 
+#include "os.h"
+
+#ifdef _MSC_VER
+	#define inline __forceinline
+#endif
+
 #define THREE_HALVES	( 1.5f )
 #define INV_SQRT		( 0x5f375a86 )
 
-float Maths_InvSqrt( const float number ) {
+inline static float QSqrt( const float number ) {
 	const float x2 = number * 0.5f;
 	float y = number;
 
@@ -17,6 +23,10 @@ float Maths_InvSqrt( const float number ) {
 	return y;
 }
 
+float Maths_InvSqrt( const float number ) {
+	return QSqrt( number );
+}
+
 float Maths_Sqrt( const float number ) {
-	return 1.0f / Maths_InvSqrt( number );
+	return 1.0f / QSqrt( number );
 }

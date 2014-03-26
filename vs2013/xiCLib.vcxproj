@@ -19,7 +19,6 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\include\boolean.h" />
     <ClInclude Include="..\include\Maths.h" />
     <ClInclude Include="..\include\Matrix.h" />
     <ClInclude Include="..\include\os.h" />
