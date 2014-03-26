@@ -1,4 +1,9 @@
 #include <Matrix.h>
+#include <boolean.h>
+
+bool_t	IsEqual( int a, int b ) {
+	return ( a == b );
+}
 
 int main( int argc, char ** argv ) {
 	mat2_t mat = {
@@ -15,6 +20,9 @@ int main( int argc, char ** argv ) {
 
 	Vector_Mul( &vec, &vec, &vec );
 	Vector_Div( &vec, &vec, &fl );
+
+	bool_t yes = TRUE;
+	yes = FALSE;
 
 	return 1;
 }
