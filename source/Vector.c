@@ -4,20 +4,9 @@
 #include "Maths.h"
 
 #define VEC4_CAST( X )	( ( vec4_t * )X )
-#define	VEC_LEN			( 4 )
 
 void Vector_Clear( void * const vector ) {
 	memset( vector, 0, sizeof( vec4_t ) );
-}
-
-void Vector_Swizzle( void * const vector, const void * const input, const size_t x, const size_t y, const size_t z, const size_t w ) {
-	vec4_t temp;
-	memcpy( &temp, input, sizeof( vec4_t ) );
-
-	VEC4_CAST( vector )->x = ( ( x == VEC_NULL ) ? 0.0f : ( ( float * )&temp )[x] );
-	VEC4_CAST( vector )->y = ( ( y == VEC_NULL ) ? 0.0f : ( ( float * )&temp )[y] );
-	VEC4_CAST( vector )->z = ( ( z == VEC_NULL ) ? 0.0f : ( ( float * )&temp )[z] );
-	VEC4_CAST( vector )->w = ( ( w == VEC_NULL ) ? 0.0f : ( ( float * )&temp )[w] );
 }
 
 void Vector_Add( void * const vector, const void * const left, const void * const right ) {
@@ -42,18 +31,37 @@ void Vector_Mul( void * const vector, const void * const left, const void * cons
 }
 
 void Vector_Div( void * const vector, const void * const left, const void * const right ) {
-	VEC4_CAST( vector )->x = VEC4_CAST( left )->x / VEC4_CAST( right )->x;
-	VEC4_CAST( vector )->y = VEC4_CAST( left )->y / VEC4_CAST( right )->y;
-	VEC4_CAST( vector )->z = VEC4_CAST( left )->z / VEC4_CAST( right )->z;
-	VEC4_CAST( vector )->w = VEC4_CAST( left )->w / VEC4_CAST( right )->w;
+	VEC4_CAST( vector )->x = ( VEC4_CAST( right )->x == 0.0f ? 0.0f : VEC4_CAST( left )->x / VEC4_CAST( right )->x );
+	VEC4_CAST( vector )->y = ( VEC4_CAST( right )->x == 0.0f ? 0.0f : VEC4_CAST( left )->y / VEC4_CAST( right )->y );
+	VEC4_CAST( vector )->z = ( VEC4_CAST( right )->x == 0.0f ? 0.0f : VEC4_CAST( left )->z / VEC4_CAST( right )->z );
+	VEC4_CAST( vector )->w = ( VEC4_CAST( right )->x == 0.0f ? 0.0f : VEC4_CAST( left )->w / VEC4_CAST( right )->w );
+}
+
+void Vector_MulMatrix( void * const vector, const void * const input, const void * const matrix, const size_t length ) {
+	const float * const vecFloat = ( const float * )input;
+	const float * const matFloat = ( const float * )matrix;
+
+	vec4_t resVec;
+	Vector_Clear( &resVec );
+	float * const resFloat = ( float * )&resVec;
+
+	size_t ii = length - 1;
+	do {
+		float sum = 0.0f;
+		size_t kk = length - 1;
+
+		do {
+			sum += matFloat[ii * VEC4 + kk] * vecFloat[kk];
+		} while ( kk-- );
+
+		resFloat[ii] = sum;
+	} while ( ii-- );
+
+	memcpy( vector, &resVec, sizeof( vec4_t ) );
 }
 
 void Vector_ToFloatPtr( const void * const vector, float * const floatPtr, const size_t length ) {
-	if ( length > VEC_LEN ) {
-		memcpy( floatPtr, vector, sizeof( float ) * VEC_LEN );
-	} else {
-		memcpy( floatPtr, vector, sizeof( float ) * length );
-	}
+	memcpy( floatPtr, vector, sizeof( float ) * length );
 }
 
 void Vector_Min( void * const vector, const void * const left, const void * const right ) {
@@ -110,7 +118,9 @@ void Vector_Cross( void * const vector, const void * const left, const void * co
 	temp.y = ( VEC4_CAST( left )->z * VEC4_CAST( right )->x ) - ( VEC4_CAST( left )->x * VEC4_CAST( right )->z );
 	temp.z = ( VEC4_CAST( left )->x * VEC4_CAST( right )->y ) - ( VEC4_CAST( left )->y * VEC4_CAST( right )->x );
 	
-	memcpy( vector, &temp, sizeof( float ) * VEC3 );
+	VEC4_CAST( vector )->x = temp.x;
+	VEC4_CAST( vector )->y = temp.y;
+	VEC4_CAST( vector )->z = temp.z;
 }
 
 float Vector_Dot( const void * const left, const void * const right, const size_t length ) {

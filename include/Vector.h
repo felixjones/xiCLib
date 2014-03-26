@@ -3,14 +3,9 @@
 
 #include <stdint.h>
 
-#define VEC_X		( 0 )
-#define VEC_Y		( 1 )
-#define VEC_Z		( 2 )
-#define VEC_W		( 3 )
-#define VEC_NULL	( 4 )
-#define VEC2		( 2 )
-#define VEC3		( 3 )
-#define VEC4		( 4 )
+#define VEC2	( 2 )
+#define VEC3	( 3 )
+#define VEC4	( 4 )
 
 typedef struct vec4_s {
 	float	x;
@@ -42,12 +37,11 @@ typedef struct vec2_s {
 void	Vector_Clear( void * const vector );
 void	Vector_ToFloatPtr( const void * const vector, float * const floatPtr, const size_t length );
 
-void	Vector_Swizzle( void * const vector, const void * const input, const size_t x, const size_t y, const size_t z, const size_t w );
-
 void	Vector_Add( void * const vector, const void * const left, const void * const right );
 void	Vector_Sub( void * const vector, const void * const left, const void * const right );
 void	Vector_Mul( void * const vector, const void * const left, const void * const right );
 void	Vector_Div( void * const vector, const void * const left, const void * const right );
+void	Vector_MulMatrix( void * const vector, const void * const input, const void * const matrix, const size_t length );
 
 void	Vector_Min( void * const vector, const void * const left, const void * const right );
 void	Vector_Max( void * const vector, const void * const left, const void * const right );

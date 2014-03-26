@@ -2,7 +2,6 @@
 
 #define THREE_HALVES	( 1.5f )
 #define INV_SQRT		( 0x5f375a86 )
-//( 0x5f3759df )
 
 float Maths_InvSqrt( const float number ) {
 	const float x2 = number * 0.5f;

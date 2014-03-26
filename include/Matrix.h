@@ -3,9 +3,9 @@
 
 #include "Vector.h"
 
-#define MAT2		( 2 )
-#define MAT3		( 3 )
-#define MAT4		( 4 )
+#define MAT2	( 2 )
+#define MAT3	( 3 )
+#define MAT4	( 4 )
 
 typedef struct mat4_s {
 	vec4_t	x;
@@ -36,5 +36,7 @@ typedef struct mat2_s {
 
 void	Matrix_Clear( void * const matrix );
 void	Matrix_ToFloatPtr( const void * const matrix, float * const floatPtr, const size_t length );
+
+void	Matrix_Mul( void * const matrix, const void * const left, const void * const right, const size_t length );
 
 #endif
