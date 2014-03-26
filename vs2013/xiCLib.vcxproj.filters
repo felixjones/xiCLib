@@ -9,8 +9,31 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="os.h">
+    <ClInclude Include="..\include\boolean.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\Matrix.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\os.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Vector.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Maths.h">
+      <Filter>include</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\source\Vector.c">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\Matrix.c">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\Maths.c">
+      <Filter>source</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
