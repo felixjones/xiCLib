@@ -21,7 +21,6 @@
   <ItemGroup>
     <ClInclude Include="..\include\Maths.h" />
     <ClInclude Include="..\include\Matrix.h" />
-    <ClInclude Include="..\include\os.h" />
     <ClInclude Include="..\include\Vector.h" />
   </ItemGroup>
   <ItemGroup>

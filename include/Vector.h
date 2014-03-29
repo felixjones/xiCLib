@@ -7,6 +7,16 @@
 #define VEC3	( 3 )
 #define VEC4	( 4 )
 
+/*
+================================================================================
+
+	Vector structures
+	Built in the style of GLSL
+	They all contain padding so sizeof == sizeof( float ) * 4
+	Use Vector_ToFloatPtr for uploading onto GPU!
+
+================================================================================
+*/
 typedef struct vec4_s {
 	float	x;
 	float	y;
@@ -60,5 +70,17 @@ void	Vector_Normalise( void * const vector, const void * const input, const size
 void	Vector_FaceForward( void * const vector, const void * const n, const void * const i, const void * const nRef, const size_t length );
 void	Vector_Reflect( void * const vector, const void * const i, const void * const n, const size_t length );
 void	Vector_Refract( void * const vector, const void * const i, const void * const n, const float r, const size_t length );
+
+void	Vector_Ceil( void * const vector, const void * const input );
+void	Vector_Floor( void * const vector, const void * const input );
+void	Vector_Round( void * const vector, const void * const input );
+void	Vector_Radians( void * const vector, const void * const input );
+void	Vector_Sin( void * const vector, const void * const input );
+void	Vector_Cos( void * const vector, const void * const input );
+void	Vector_Tan( void * const vector, const void * const input );
+void	Vector_ASin( void * const vector, const void * const input );
+void	Vector_ACos( void * const vector, const void * const input );
+void	Vector_ATan( void * const vector, const void * const input );
+void	Vector_Pow( void * const vector, const void * const input, const void * const powerof );
 
 #endif

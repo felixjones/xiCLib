@@ -4,10 +4,24 @@
 
 #define MAT4_CAST( X )	( ( mat4_t * )X )
 
+/*
+====================
+Matrix_Clear
+
+	Calls memset on the given matrix
+====================
+*/
 void Matrix_Clear( void * const matrix ) {
 	memset( matrix, 0, sizeof( mat4_t ) );
 }
 
+/*
+====================
+Matrix_ToFloatPtr
+
+	Copies the matrix into a float pointer
+====================
+*/
 void Matrix_ToFloatPtr( const void * const matrix, float * const floatPtr, const size_t length ) {
 	size_t index = length - 1;
 	do {
@@ -15,6 +29,13 @@ void Matrix_ToFloatPtr( const void * const matrix, float * const floatPtr, const
 	} while ( index-- );
 }
 
+/*
+====================
+Matrix_Mul
+
+	Multiplies two matrices of the same size together
+====================
+*/
 void Matrix_Mul( void * const matrix, const void * const left, const void * const right, const size_t length ) {
 	const float * const leftFloat = ( const float * )left;
 	const float * const rightFloat = ( const float * )right;

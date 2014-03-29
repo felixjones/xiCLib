@@ -7,6 +7,16 @@
 #define MAT3	( 3 )
 #define MAT4	( 4 )
 
+/*
+================================================================================
+
+	Matrix structures
+	Built in the style of GLSL
+	They all contain padding so sizeof == sizeof( float ) * 16
+	Use Matrix_ToFloatPtr for uploading onto GPU!
+
+================================================================================
+*/
 typedef struct mat4_s {
 	vec4_t	x;
 	vec4_t	y;

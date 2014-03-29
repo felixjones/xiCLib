@@ -12,9 +12,6 @@
     <ClInclude Include="..\include\Matrix.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\os.h">
-      <Filter>include</Filter>
-    </ClInclude>
     <ClInclude Include="..\include\Vector.h">
       <Filter>include</Filter>
     </ClInclude>
