@@ -236,7 +236,7 @@ void Vector_Cross( void * const vector, const void * const left, const void * co
 	temp.y = ( VEC4_CAST( left )->z * VEC4_CAST( right )->x ) - ( VEC4_CAST( left )->x * VEC4_CAST( right )->z );
 	temp.z = ( VEC4_CAST( left )->x * VEC4_CAST( right )->y ) - ( VEC4_CAST( left )->y * VEC4_CAST( right )->x );
 	
-	memcpy( vector, &temp, sizeof( float ) * VEC3 );
+	memcpy( vector, &temp, sizeof( vec4_t ) );
 	VEC4_CAST( left )->w = 1.0f;
 }
 
@@ -453,9 +453,152 @@ void Vector_ATan( void * const vector, const void * const input ) {
 	VEC4_CAST( vector )->w = Maths_ATan( VEC4_CAST( input )->w );
 }
 
+void Vector_SinH( void * const vector, const void * const input ) {
+	VEC4_CAST( vector )->x = Maths_SinH( VEC4_CAST( input )->x );
+	VEC4_CAST( vector )->y = Maths_SinH( VEC4_CAST( input )->y );
+	VEC4_CAST( vector )->z = Maths_SinH( VEC4_CAST( input )->z );
+	VEC4_CAST( vector )->w = Maths_SinH( VEC4_CAST( input )->w );
+}
+
+void Vector_CosH( void * const vector, const void * const input ) {
+	VEC4_CAST( vector )->x = Maths_CosH( VEC4_CAST( input )->x );
+	VEC4_CAST( vector )->y = Maths_CosH( VEC4_CAST( input )->y );
+	VEC4_CAST( vector )->z = Maths_CosH( VEC4_CAST( input )->z );
+	VEC4_CAST( vector )->w = Maths_CosH( VEC4_CAST( input )->w );
+}
+
+void Vector_TanH( void * const vector, const void * const input ) {
+	VEC4_CAST( vector )->x = Maths_TanH( VEC4_CAST( input )->x );
+	VEC4_CAST( vector )->y = Maths_TanH( VEC4_CAST( input )->y );
+	VEC4_CAST( vector )->z = Maths_TanH( VEC4_CAST( input )->z );
+	VEC4_CAST( vector )->w = Maths_TanH( VEC4_CAST( input )->w );
+}
+
+void Vector_ASinH( void * const vector, const void * const input ) {
+	VEC4_CAST( vector )->x = Maths_ASinH( VEC4_CAST( input )->x );
+	VEC4_CAST( vector )->y = Maths_ASinH( VEC4_CAST( input )->y );
+	VEC4_CAST( vector )->z = Maths_ASinH( VEC4_CAST( input )->z );
+	VEC4_CAST( vector )->w = Maths_ASinH( VEC4_CAST( input )->w );
+}
+
+void Vector_ACosH( void * const vector, const void * const input ) {
+	VEC4_CAST( vector )->x = Maths_ACosH( VEC4_CAST( input )->x );
+	VEC4_CAST( vector )->y = Maths_ACosH( VEC4_CAST( input )->y );
+	VEC4_CAST( vector )->z = Maths_ACosH( VEC4_CAST( input )->z );
+	VEC4_CAST( vector )->w = Maths_ACosH( VEC4_CAST( input )->w );
+}
+
+void Vector_ATanH( void * const vector, const void * const input ) {
+	VEC4_CAST( vector )->x = Maths_ATanH( VEC4_CAST( input )->x );
+	VEC4_CAST( vector )->y = Maths_ATanH( VEC4_CAST( input )->y );
+	VEC4_CAST( vector )->z = Maths_ATanH( VEC4_CAST( input )->z );
+	VEC4_CAST( vector )->w = Maths_ATanH( VEC4_CAST( input )->w );
+}
+
 void Vector_Pow( void * const vector, const void * const input, const void * const powerof ) {
 	VEC4_CAST( vector )->x = Maths_Pow( VEC4_CAST( input )->x, VEC4_CAST( powerof )->x );
 	VEC4_CAST( vector )->y = Maths_Pow( VEC4_CAST( input )->y, VEC4_CAST( powerof )->y );
 	VEC4_CAST( vector )->z = Maths_Pow( VEC4_CAST( input )->z, VEC4_CAST( powerof )->z );
 	VEC4_CAST( vector )->w = Maths_Pow( VEC4_CAST( input )->w, VEC4_CAST( powerof )->w );
+}
+
+void Vector_Exp( void * const vector, const void * const input ) {
+	VEC4_CAST( vector )->x = Maths_Exp( VEC4_CAST( input )->x );
+	VEC4_CAST( vector )->y = Maths_Exp( VEC4_CAST( input )->y );
+	VEC4_CAST( vector )->z = Maths_Exp( VEC4_CAST( input )->z );
+	VEC4_CAST( vector )->w = Maths_Exp( VEC4_CAST( input )->w );
+}
+
+void Vector_Exp2( void * const vector, const void * const input ) {
+	VEC4_CAST( vector )->x = Maths_Exp2( VEC4_CAST( input )->x );
+	VEC4_CAST( vector )->y = Maths_Exp2( VEC4_CAST( input )->y );
+	VEC4_CAST( vector )->z = Maths_Exp2( VEC4_CAST( input )->z );
+	VEC4_CAST( vector )->w = Maths_Exp2( VEC4_CAST( input )->w );
+}
+
+void Vector_FMA( void * const vector, const void * const a, const void * const b, const void * const c ) {
+	vec4_t temp;
+
+	Vector_Mul( &temp, a, b );
+	Vector_Add( vector, &temp, c );
+}
+
+void Vector_Fract( void * const vector, const void * const input ) {
+	VEC4_CAST( vector )->x = FRACT( VEC4_CAST( input )->x );
+	VEC4_CAST( vector )->y = FRACT( VEC4_CAST( input )->y );
+	VEC4_CAST( vector )->z = FRACT( VEC4_CAST( input )->z );
+	VEC4_CAST( vector )->w = FRACT( VEC4_CAST( input )->w );
+}
+
+int Vector_Equal( const void * const left, const void * const right, const size_t length ) {
+	const int xEqual = !( VEC4_CAST( left )->x - VEC4_CAST( right )->x );
+	const int yEqual = ( length >= VEC2 ? !( VEC4_CAST( left )->y - VEC4_CAST( right )->y ) : 1 );
+	const int zEqual = ( length >= VEC3 ? !( VEC4_CAST( left )->z - VEC4_CAST( right )->z ) : 1 );
+	const int wEqual = ( length >= VEC4 ? !( VEC4_CAST( left )->w - VEC4_CAST( right )->w ) : 1 );
+
+	return ( xEqual && yEqual && zEqual && wEqual );
+}
+
+int Vector_GreaterThan( const void * const left, const void * const right, const size_t length ) {
+	const int xEqual = ( VEC4_CAST( left )->x > VEC4_CAST( right )->x );
+	const int yEqual = ( length >= VEC2 ? ( VEC4_CAST( left )->y > VEC4_CAST( right )->y ) : 1 );
+	const int zEqual = ( length >= VEC3 ? ( VEC4_CAST( left )->z > VEC4_CAST( right )->z ) : 1 );
+	const int wEqual = ( length >= VEC4 ? ( VEC4_CAST( left )->w > VEC4_CAST( right )->w ) : 1 );
+
+	return ( xEqual && yEqual && zEqual && wEqual );
+}
+
+int Vector_GreaterThanEqual( const void * const left, const void * const right, const size_t length ) {
+	const int xEqual = ( VEC4_CAST( left )->x >= VEC4_CAST( right )->x );
+	const int yEqual = ( length >= VEC2 ? ( VEC4_CAST( left )->y >= VEC4_CAST( right )->y ) : 1 );
+	const int zEqual = ( length >= VEC3 ? ( VEC4_CAST( left )->z >= VEC4_CAST( right )->z ) : 1 );
+	const int wEqual = ( length >= VEC4 ? ( VEC4_CAST( left )->w >= VEC4_CAST( right )->w ) : 1 );
+
+	return ( xEqual && yEqual && zEqual && wEqual );
+}
+
+int Vector_LessThan( const void * const left, const void * const right, const size_t length ) {
+	const int xEqual = ( VEC4_CAST( left )->x < VEC4_CAST( right )->x );
+	const int yEqual = ( length >= VEC2 ? ( VEC4_CAST( left )->y < VEC4_CAST( right )->y ) : 1 );
+	const int zEqual = ( length >= VEC3 ? ( VEC4_CAST( left )->z < VEC4_CAST( right )->z ) : 1 );
+	const int wEqual = ( length >= VEC4 ? ( VEC4_CAST( left )->w < VEC4_CAST( right )->w ) : 1 );
+
+	return ( xEqual && yEqual && zEqual && wEqual );
+}
+
+int Vector_LessThanEqual( const void * const left, const void * const right, const size_t length ) {
+	const int xEqual = ( VEC4_CAST( left )->x <= VEC4_CAST( right )->x );
+	const int yEqual = ( length >= VEC2 ? ( VEC4_CAST( left )->y <= VEC4_CAST( right )->y ) : 1 );
+	const int zEqual = ( length >= VEC3 ? ( VEC4_CAST( left )->z <= VEC4_CAST( right )->z ) : 1 );
+	const int wEqual = ( length >= VEC4 ? ( VEC4_CAST( left )->w <= VEC4_CAST( right )->w ) : 1 );
+
+	return ( xEqual && yEqual && zEqual && wEqual );
+}
+
+void Vector_Sqrt( void * const vector, const void * const input ) {
+	VEC4_CAST( vector )->x = Maths_Sqrt( VEC4_CAST( input )->x );
+	VEC4_CAST( vector )->y = Maths_Sqrt( VEC4_CAST( input )->y );
+	VEC4_CAST( vector )->z = Maths_Sqrt( VEC4_CAST( input )->z );
+	VEC4_CAST( vector )->w = Maths_Sqrt( VEC4_CAST( input )->w );
+}
+
+void Vector_InverseSqrt( void * const vector, const void * const input ) {
+	VEC4_CAST( vector )->x = Maths_InvSqrt( VEC4_CAST( input )->x );
+	VEC4_CAST( vector )->y = Maths_InvSqrt( VEC4_CAST( input )->y );
+	VEC4_CAST( vector )->z = Maths_InvSqrt( VEC4_CAST( input )->z );
+	VEC4_CAST( vector )->w = Maths_InvSqrt( VEC4_CAST( input )->w );
+}
+
+void Vector_Log( void * const vector, const void * const input ) {
+	VEC4_CAST( vector )->x = Maths_Log( VEC4_CAST( input )->x );
+	VEC4_CAST( vector )->y = Maths_Log( VEC4_CAST( input )->y );
+	VEC4_CAST( vector )->z = Maths_Log( VEC4_CAST( input )->z );
+	VEC4_CAST( vector )->w = Maths_Log( VEC4_CAST( input )->w );
+}
+
+void Vector_Log2( void * const vector, const void * const input ) {
+	VEC4_CAST( vector )->x = Maths_Log2( VEC4_CAST( input )->x );
+	VEC4_CAST( vector )->y = Maths_Log2( VEC4_CAST( input )->y );
+	VEC4_CAST( vector )->z = Maths_Log2( VEC4_CAST( input )->z );
+	VEC4_CAST( vector )->w = Maths_Log2( VEC4_CAST( input )->w );
 }

@@ -75,12 +75,34 @@ void	Vector_Ceil( void * const vector, const void * const input );
 void	Vector_Floor( void * const vector, const void * const input );
 void	Vector_Round( void * const vector, const void * const input );
 void	Vector_Radians( void * const vector, const void * const input );
+
 void	Vector_Sin( void * const vector, const void * const input );
 void	Vector_Cos( void * const vector, const void * const input );
 void	Vector_Tan( void * const vector, const void * const input );
 void	Vector_ASin( void * const vector, const void * const input );
 void	Vector_ACos( void * const vector, const void * const input );
 void	Vector_ATan( void * const vector, const void * const input );
+void	Vector_SinH( void * const vector, const void * const input );
+void	Vector_CosH( void * const vector, const void * const input );
+void	Vector_TanH( void * const vector, const void * const input );
+void	Vector_ASinH( void * const vector, const void * const input );
+void	Vector_ACosH( void * const vector, const void * const input );
+void	Vector_ATanH( void * const vector, const void * const input );
+
 void	Vector_Pow( void * const vector, const void * const input, const void * const powerof );
+void	Vector_Exp( void * const vector, const void * const input );
+void	Vector_Exp2( void * const vector, const void * const input );
+void	Vector_FMA( void * const vector, const void * const a, const void * const b, const void * const c );
+void	Vector_Fract( void * const vector, const void * const input );
+void	Vector_Sqrt( void * const vector, const void * const input );
+void	Vector_InverseSqrt( void * const vector, const void * const input )
+void	Vector_Log( void * const vector, const void * const input );
+void	Vector_Log2( void * const vector, const void * const input );
+
+int		Vector_Equal( const void * const left, const void * const right, const size_t length );
+int		Vector_GreaterThan( const void * const left, const void * const right, const size_t length );
+int		Vector_GreaterThanEqual( const void * const left, const void * const right, const size_t length );
+int		Vector_LessThan( const void * const left, const void * const right, const size_t length );
+int		Vector_LessThanEqual( const void * const left, const void * const right, const size_t length );
 
 #endif

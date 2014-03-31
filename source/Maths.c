@@ -19,6 +19,28 @@ static float tanTable[LOOKUP_LEN];
 static float asinTable[LOOKUP_LEN];
 static float acosTable[LOOKUP_LEN];
 static float atanTable[LOOKUP_LEN];
+static float sinhTable[LOOKUP_LEN];
+static float coshTable[LOOKUP_LEN];
+static float tanhTable[LOOKUP_LEN];
+static float asinhTable[LOOKUP_LEN];
+static float acoshTable[LOOKUP_LEN];
+static float atanhTable[LOOKUP_LEN];
+
+inline static float Trig( const float number, const size_t index, float ( * Func_f )( float ), float * const table ) {
+	float * const val = &table[index];
+
+	if ( *val ) {
+		return *val;
+	}
+
+	*val = Func_f( number );
+
+	if ( ( *val ) * ( *val ) > 0.0f ) {
+		return *val;
+	}
+
+	return TINY_NUM;
+}
 
 /*
 ====================
@@ -43,19 +65,16 @@ inline static float QSqrt( const float number ) {
 }
 
 inline static size_t TableIndex( const float radian ) {
-	size_t index = RAD2DEG( radian ) * ( LOOKUP_LEN * INV_360 );
+	size_t index = ( size_t )( RAD2DEG( radian ) * ( LOOKUP_LEN * INV_360 ) );
 	while ( index >= LOOKUP_LEN ) {
 		index -= LOOKUP_LEN;
-	}
-	while ( index < 0 ) {
-		index += LOOKUP_LEN;
 	}
 
 	return index;
 }
 
 inline static size_t ArcIndex( const float arc ) {
-	const size_t index = ( arc + 1.0f ) * ( LOOKUP_LEN >> 1 );
+	const size_t index = ( size_t )( ( arc + 1.0f ) * ( LOOKUP_LEN >> 1 ) );
 	if ( index == LOOKUP_LEN ) {
 		return 0;
 	}
@@ -87,119 +106,75 @@ float Maths_Sqrt( const float number ) {
 }
 
 float Maths_Sin( const float radian ) {
-	const size_t index = TableIndex( radian );
-	float * const val = &sinTable[index];
-
-	if ( *val ) {
-		return *val;
-	}
-
-	*val = sinf( radian );
-	if ( !*val ) {
-		*val = TINY_NUM;
-	}
-
-	return *val;
+	return Trig( radian, TableIndex( radian ), &sinf, &sinTable[0] );
 }
 
 float Maths_Cos( const float radian ) {
-	const size_t index = TableIndex( radian );
-	float * const val = &cosTable[index];
-
-	if ( *val ) {
-		return *val;
-	}
-
-	*val = cosf( radian );
-	if ( !*val ) {
-		*val = TINY_NUM;
-	}
-
-	return *val;
+	return Trig( radian, TableIndex( radian ), &cosf, &cosTable[0] );
 }
 
 float Maths_Tan( const float radian ) {
-	const size_t index = TableIndex( radian );
-	float * const val = &tanTable[index];
-
-	if ( *val ) {
-		return *val;
-	}
-
-	*val = tanf( radian );
-	if ( !*val ) {
-		*val = TINY_NUM;
-	}
-
-	return *val;
+	return Trig( radian, TableIndex( radian ), &tanf, &tanTable[0] );
 }
 
 float Maths_ASin( const float arc ) {
-	if ( arc > 1.0f ) {
-		return 0.0f;
-	} else if ( arc < -1.0f ) {
-		return 0.0f;
-	}
-
-	const size_t index = ArcIndex( arc );
-	float * const val = &asinTable[index];
-
-	if ( *val ) {
-		return *val;
-	}
-
-	*val = asinf( arc );
-	if ( !*val ) {
-		*val = TINY_NUM;
-	}
-
-	return *val;
+	return Trig( arc, ArcIndex( arc ), &asinf, &asinTable[0] );
 }
 
 float Maths_ACos( const float arc ) {
-	if ( arc > 1.0f ) {
-		return 0.0f;
-	} else if ( arc < -1.0f ) {
-		return 0.0f;
-	}
-
-	const size_t index = ArcIndex( arc );
-	float * const val = &acosTable[index];
-
-	if ( *val ) {
-		return *val;
-	}
-
-	*val = acosf( arc );
-	if ( !*val ) {
-		*val = TINY_NUM;
-	}
-
-	return *val;
+	return Trig( arc, ArcIndex( arc ), &acosf, &acosTable[0] );
 }
 
 float Maths_ATan( const float arc ) {
-	if ( arc > 1.0f ) {
-		return 0.0f;
-	} else if ( arc < -1.0f ) {
-		return 0.0f;
-	}
+	return Trig( arc, ArcIndex( arc ), &atanf, &atanTable[0] );
+}
 
-	const size_t index = ArcIndex( arc );
-	float * const val = &atanTable[index];
+float Maths_SinH( const float radian ) {
+	return sinhf( radian );
+	//return Trig( radian, TableIndex( radian ), &sinhf, &sinhTable[0] );
+}
 
-	if ( *val ) {
-		return *val;
-	}
+float Maths_CosH( const float radian ) {
+	return coshf( radian );
+	//return Trig( radian, TableIndex( radian ), &coshf, &coshTable[0] );
+}
 
-	*val = atanf( arc );
-	if ( !*val ) {
-		*val = TINY_NUM;
-	}
+float Maths_TanH( const float radian ) {
+	return tanhf( radian );
+	//return Trig( radian, TableIndex( radian ), &tanhf, &tanhTable[0] );
+}
 
-	return *val;
+float Maths_ASinH( const float arc ) {
+	return asinhf( arc );
+	//return Trig( arc, TableIndex( arc ), &asinhf, &asinhTable[0] );
+}
+
+float Maths_ACosH( const float arc ) {
+	return acoshf( arc );
+	//return Trig( arc, TableIndex( arc ), &acoshf, &acoshTable[0] );
+}
+
+float Maths_ATanH( const float arc ) {
+	return atanhf( arc );
+	//return Trig( arc, TableIndex( arc ), &atanhf, &atanhTable[0] );
 }
 
 float Maths_Pow( const float number, const float power ) {
 	return powf( number, power );
+}
+
+float Maths_Exp( const float number ) {
+	return expf( number );
+}
+
+float Maths_Exp2( const float number ) {
+	return exp2f( number );
+}
+
+float Maths_Log( const float number ) {
+	return log( number );
+}
+
+float Maths_Log2( const float number ) {
+	return log2( number );
 }
