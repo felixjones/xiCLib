@@ -29,6 +29,15 @@ typedef enum trigFunc_e {
 	TRIG_ATAN
 } trigFunc_t;
 
+/*
+====================
+Trig
+
+	Calls a given trig function
+	Will check a given table for a cached result
+	No result? Calc a new one!
+====================
+*/
 inline static float Trig( const float number, const size_t index, const trigFunc_t trigFunc, float * const table ) {
 	float * const val = &table[index];
 
@@ -86,6 +95,13 @@ inline static float QSqrt( const float number ) {
 	return y;
 }
 
+/*
+====================
+TableIndex
+
+	Function for getting an index of the degree table from radians
+====================
+*/
 inline static size_t TableIndex( const float radian ) {
 	size_t index = ( size_t )( RAD2DEG( radian ) * ( LOOKUP_LEN * INV_360 ) );
 	while ( index >= LOOKUP_LEN ) {
@@ -95,6 +111,13 @@ inline static size_t TableIndex( const float radian ) {
 	return index;
 }
 
+/*
+====================
+ArcIndex
+
+	Function for getting an index of the arc table from a number -1 to 1
+====================
+*/
 inline static size_t ArcIndex( const float arc ) {
 	const size_t index = ( size_t )( ( arc + 1.0f ) * ( LOOKUP_LEN >> 1 ) );
 	if ( index == LOOKUP_LEN ) {
@@ -127,53 +150,101 @@ float Maths_Sqrt( const float number ) {
 	return number * QSqrt( number );
 }
 
+/*
+====================
+Maths_Sin
+
+	That trig function
+====================
+*/
 float Maths_Sin( const float radian ) {
 	return Trig( radian, TableIndex( radian ), TRIG_SIN, &sinTable[0] );
 }
 
+/*
+====================
+Maths_Cos
+
+	That trig function
+====================
+*/
 float Maths_Cos( const float radian ) {
 	return Trig( radian, TableIndex( radian ), TRIG_COS, &cosTable[0] );
 }
 
+/*
+====================
+Maths_Tan
+
+	That trig function
+====================
+*/
 float Maths_Tan( const float radian ) {
 	return Trig( radian, TableIndex( radian ), TRIG_TAN, &tanTable[0] );
 }
 
+/*
+====================
+Maths_ASin
+
+	That trig function
+====================
+*/
 float Maths_ASin( const float arc ) {
 	return Trig( arc, ArcIndex( arc ), TRIG_ASIN, &asinTable[0] );
 }
 
+/*
+====================
+Maths_ACos
+
+	That trig function
+====================
+*/
 float Maths_ACos( const float arc ) {
 	return Trig( arc, ArcIndex( arc ), TRIG_ACOS, &acosTable[0] );
 }
 
+/*
+====================
+Maths_ATan
+
+	That trig function
+====================
+*/
 float Maths_ATan( const float arc ) {
 	return Trig( arc, ArcIndex( arc ), TRIG_ATAN, &atanTable[0] );
 }
 
-float Maths_SinH( const float radian ) {
-	return sinhf( radian );
-	//return Trig( radian, TableIndex( radian ), &sinhf, &sinhTable[0] );
-}
+/*
+====================
+Maths_Pow
 
-float Maths_CosH( const float radian ) {
-	return coshf( radian );
-	//return Trig( radian, TableIndex( radian ), &coshf, &coshTable[0] );
-}
-
-float Maths_TanH( const float radian ) {
-	return tanhf( radian );
-	//return Trig( radian, TableIndex( radian ), &tanhf, &tanhTable[0] );
-}
-
+	returns number ^ power
+====================
+*/
 float Maths_Pow( const float number, const float power ) {
 	return powf( number, power );
 }
 
+/*
+====================
+Maths_Exp
+
+	Exponent function
+====================
+*/
 float Maths_Exp( const float number ) {
 	return expf( number );
 }
 
+/*
+====================
+Maths_Log
+
+	Log function
+====================
+*/
 float Maths_Log( const float number ) {
 	return logf( number );
 }

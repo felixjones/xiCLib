@@ -64,6 +64,14 @@ void Matrix_Mul( void * const matrix, const void * const left, const void * cons
 	memcpy( matrix, &resMat, sizeof( mat4_t ) );
 }
 
+/*
+====================
+Matrix_Determinant
+
+	Returns the float determinant of a given matrix
+	The length determins the determinant algorithm
+====================
+*/
 float Matrix_Determinant( const void * const matrix, const size_t length ) {
 	if ( length == VEC2 ) {
 
@@ -100,6 +108,14 @@ float Matrix_Determinant( const void * const matrix, const size_t length ) {
 	return 0.0f;
 }
 
+/*
+====================
+Matrix_Inverse
+
+	Inverts the input matrix into matrix
+	The length determins the algorithm
+====================
+*/
 void Matrix_Inverse( void * const matrix, const void * const input, const size_t length ) {
 	mat4_t temp;
 

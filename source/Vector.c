@@ -381,6 +381,13 @@ void Vector_Refract( void * const vector, const void * const i, const void * con
 	}
 }
 
+/*
+====================
+Vector_Ceil
+
+	Returns the ceil'd value of the float components
+====================
+*/
 void Vector_Ceil( void * const vector, const void * const input ) {
 	VEC4_CAST( vector )->x = CEIL( VEC4_CAST( input )->x );
 	VEC4_CAST( vector )->y = CEIL( VEC4_CAST( input )->y );
@@ -388,6 +395,13 @@ void Vector_Ceil( void * const vector, const void * const input ) {
 	VEC4_CAST( vector )->w = CEIL( VEC4_CAST( input )->w );
 }
 
+/*
+====================
+Vector_Floor
+
+	Returns the floor'd value of the float components
+====================
+*/
 void Vector_Floor( void * const vector, const void * const input ) {
 	VEC4_CAST( vector )->x = FLOOR( VEC4_CAST( input )->x );
 	VEC4_CAST( vector )->y = FLOOR( VEC4_CAST( input )->y );
@@ -395,6 +409,13 @@ void Vector_Floor( void * const vector, const void * const input ) {
 	VEC4_CAST( vector )->w = FLOOR( VEC4_CAST( input )->w );
 }
 
+/*
+====================
+Vector_Round
+
+	For each component, > 0.5f is ceil'd, else floor'd
+====================
+*/
 void Vector_Round( void * const vector, const void * const input ) {
 	VEC4_CAST( vector )->x = ROUND( VEC4_CAST( input )->x );
 	VEC4_CAST( vector )->y = ROUND( VEC4_CAST( input )->y );
@@ -402,6 +423,13 @@ void Vector_Round( void * const vector, const void * const input ) {
 	VEC4_CAST( vector )->w = ROUND( VEC4_CAST( input )->w );
 }
 
+/*
+====================
+Vector_Radians
+
+	Converts the components from degrees to radians
+====================
+*/
 void Vector_Radians( void * const vector, const void * const input ) {
 	VEC4_CAST( vector )->x = DEG2RAD( VEC4_CAST( input )->x );
 	VEC4_CAST( vector )->y = DEG2RAD( VEC4_CAST( input )->y );
@@ -409,6 +437,13 @@ void Vector_Radians( void * const vector, const void * const input ) {
 	VEC4_CAST( vector )->w = DEG2RAD( VEC4_CAST( input )->w );
 }
 
+/*
+====================
+Vector_Degrees
+
+	Converts the components from radians to degrees
+====================
+*/
 void Vector_Degrees( void * const vector, const void * const input ) {
 	VEC4_CAST( vector )->x = RAD2DEG( VEC4_CAST( input )->x );
 	VEC4_CAST( vector )->y = RAD2DEG( VEC4_CAST( input )->y );
@@ -416,6 +451,13 @@ void Vector_Degrees( void * const vector, const void * const input ) {
 	VEC4_CAST( vector )->w = RAD2DEG( VEC4_CAST( input )->w );
 }
 
+/*
+====================
+Vector_Sin
+
+	Calls the trig function on all components
+====================
+*/
 void Vector_Sin( void * const vector, const void * const input ) {
 	VEC4_CAST( vector )->x = Maths_Sin( VEC4_CAST( input )->x );
 	VEC4_CAST( vector )->y = Maths_Sin( VEC4_CAST( input )->y );
@@ -423,6 +465,13 @@ void Vector_Sin( void * const vector, const void * const input ) {
 	VEC4_CAST( vector )->w = Maths_Sin( VEC4_CAST( input )->w );
 }
 
+/*
+====================
+Vector_Cos
+
+	Calls the trig function on all components
+====================
+*/
 void Vector_Cos( void * const vector, const void * const input ) {
 	VEC4_CAST( vector )->x = Maths_Cos( VEC4_CAST( input )->x );
 	VEC4_CAST( vector )->y = Maths_Cos( VEC4_CAST( input )->y );
@@ -430,6 +479,13 @@ void Vector_Cos( void * const vector, const void * const input ) {
 	VEC4_CAST( vector )->w = Maths_Cos( VEC4_CAST( input )->w );
 }
 
+/*
+====================
+Vector_Tan
+
+	Calls the trig function on all components
+====================
+*/
 void Vector_Tan( void * const vector, const void * const input ) {
 	VEC4_CAST( vector )->x = Maths_Tan( VEC4_CAST( input )->x );
 	VEC4_CAST( vector )->y = Maths_Tan( VEC4_CAST( input )->y );
@@ -437,6 +493,13 @@ void Vector_Tan( void * const vector, const void * const input ) {
 	VEC4_CAST( vector )->w = Maths_Tan( VEC4_CAST( input )->w );
 }
 
+/*
+====================
+Vector_ASin
+
+	Calls the trig function on all components
+====================
+*/
 void Vector_ASin( void * const vector, const void * const input ) {
 	VEC4_CAST( vector )->x = Maths_ASin( VEC4_CAST( input )->x );
 	VEC4_CAST( vector )->y = Maths_ASin( VEC4_CAST( input )->y );
@@ -444,6 +507,13 @@ void Vector_ASin( void * const vector, const void * const input ) {
 	VEC4_CAST( vector )->w = Maths_ASin( VEC4_CAST( input )->w );
 }
 
+/*
+====================
+Vector_ACos
+
+	Calls the trig function on all components
+====================
+*/
 void Vector_ACos( void * const vector, const void * const input ) {
 	VEC4_CAST( vector )->x = Maths_ACos( VEC4_CAST( input )->x );
 	VEC4_CAST( vector )->y = Maths_ACos( VEC4_CAST( input )->y );
@@ -451,6 +521,13 @@ void Vector_ACos( void * const vector, const void * const input ) {
 	VEC4_CAST( vector )->w = Maths_ACos( VEC4_CAST( input )->w );
 }
 
+/*
+====================
+Vector_ATan
+
+	Calls the trig function on all components
+====================
+*/
 void Vector_ATan( void * const vector, const void * const input ) {
 	VEC4_CAST( vector )->x = Maths_ATan( VEC4_CAST( input )->x );
 	VEC4_CAST( vector )->y = Maths_ATan( VEC4_CAST( input )->y );
@@ -458,6 +535,15 @@ void Vector_ATan( void * const vector, const void * const input ) {
 	VEC4_CAST( vector )->w = Maths_ATan( VEC4_CAST( input )->w );
 }
 
+/*
+====================
+Vector_Pow
+
+	The powerof vector contains the power
+	The input vector contains the original numbers
+	Outputs to vector
+====================
+*/
 void Vector_Pow( void * const vector, const void * const input, const void * const powerof ) {
 	VEC4_CAST( vector )->x = Maths_Pow( VEC4_CAST( input )->x, VEC4_CAST( powerof )->x );
 	VEC4_CAST( vector )->y = Maths_Pow( VEC4_CAST( input )->y, VEC4_CAST( powerof )->y );
@@ -465,6 +551,13 @@ void Vector_Pow( void * const vector, const void * const input, const void * con
 	VEC4_CAST( vector )->w = Maths_Pow( VEC4_CAST( input )->w, VEC4_CAST( powerof )->w );
 }
 
+/*
+====================
+Vector_Exp
+
+	Returns the exponent of each input element into the vector
+====================
+*/
 void Vector_Exp( void * const vector, const void * const input ) {
 	VEC4_CAST( vector )->x = Maths_Exp( VEC4_CAST( input )->x );
 	VEC4_CAST( vector )->y = Maths_Exp( VEC4_CAST( input )->y );
@@ -472,6 +565,15 @@ void Vector_Exp( void * const vector, const void * const input ) {
 	VEC4_CAST( vector )->w = Maths_Exp( VEC4_CAST( input )->w );
 }
 
+/*
+====================
+Vector_FMA
+
+	Fused multiply-add!
+	Does ( a * b + c )
+	Result goes in vector
+====================
+*/
 void Vector_FMA( void * const vector, const void * const a, const void * const b, const void * const c ) {
 	vec4_t temp;
 
@@ -479,6 +581,13 @@ void Vector_FMA( void * const vector, const void * const a, const void * const b
 	Vector_Add( vector, &temp, c );
 }
 
+/*
+====================
+Vector_Fract
+
+	Gets the faction part of the input vector's elements
+====================
+*/
 void Vector_Fract( void * const vector, const void * const input ) {
 	VEC4_CAST( vector )->x = FRACT( VEC4_CAST( input )->x );
 	VEC4_CAST( vector )->y = FRACT( VEC4_CAST( input )->y );
@@ -486,6 +595,14 @@ void Vector_Fract( void * const vector, const void * const input ) {
 	VEC4_CAST( vector )->w = FRACT( VEC4_CAST( input )->w );
 }
 
+/*
+====================
+Vector_Equal
+
+	Checks up to length elements of left and right
+	Does a boolean comparison for them
+====================
+*/
 int Vector_Equal( const void * const left, const void * const right, const size_t length ) {
 	const int xEqual = !( VEC4_CAST( left )->x - VEC4_CAST( right )->x );
 	const int yEqual = ( length >= VEC2 ? !( VEC4_CAST( left )->y - VEC4_CAST( right )->y ) : 1 );
@@ -495,6 +612,14 @@ int Vector_Equal( const void * const left, const void * const right, const size_
 	return ( xEqual && yEqual && zEqual && wEqual );
 }
 
+/*
+====================
+Vector_GreaterThan
+
+	Checks up to length elements of left and right
+	Does a boolean comparison for them
+====================
+*/
 int Vector_GreaterThan( const void * const left, const void * const right, const size_t length ) {
 	const int xEqual = ( VEC4_CAST( left )->x > VEC4_CAST( right )->x );
 	const int yEqual = ( length >= VEC2 ? ( VEC4_CAST( left )->y > VEC4_CAST( right )->y ) : 1 );
@@ -504,6 +629,14 @@ int Vector_GreaterThan( const void * const left, const void * const right, const
 	return ( xEqual && yEqual && zEqual && wEqual );
 }
 
+/*
+====================
+Vector_GreaterThanEqual
+
+	Checks up to length elements of left and right
+	Does a boolean comparison for them
+====================
+*/
 int Vector_GreaterThanEqual( const void * const left, const void * const right, const size_t length ) {
 	const int xEqual = ( VEC4_CAST( left )->x >= VEC4_CAST( right )->x );
 	const int yEqual = ( length >= VEC2 ? ( VEC4_CAST( left )->y >= VEC4_CAST( right )->y ) : 1 );
@@ -513,6 +646,14 @@ int Vector_GreaterThanEqual( const void * const left, const void * const right, 
 	return ( xEqual && yEqual && zEqual && wEqual );
 }
 
+/*
+====================
+Vector_LessThan
+
+	Checks up to length elements of left and right
+	Does a boolean comparison for them
+====================
+*/
 int Vector_LessThan( const void * const left, const void * const right, const size_t length ) {
 	const int xEqual = ( VEC4_CAST( left )->x < VEC4_CAST( right )->x );
 	const int yEqual = ( length >= VEC2 ? ( VEC4_CAST( left )->y < VEC4_CAST( right )->y ) : 1 );
@@ -522,6 +663,14 @@ int Vector_LessThan( const void * const left, const void * const right, const si
 	return ( xEqual && yEqual && zEqual && wEqual );
 }
 
+/*
+====================
+Vector_LessThanEqual
+
+	Checks up to length elements of left and right
+	Does a boolean comparison for them
+====================
+*/
 int Vector_LessThanEqual( const void * const left, const void * const right, const size_t length ) {
 	const int xEqual = ( VEC4_CAST( left )->x <= VEC4_CAST( right )->x );
 	const int yEqual = ( length >= VEC2 ? ( VEC4_CAST( left )->y <= VEC4_CAST( right )->y ) : 1 );
@@ -531,6 +680,13 @@ int Vector_LessThanEqual( const void * const left, const void * const right, con
 	return ( xEqual && yEqual && zEqual && wEqual );
 }
 
+/*
+====================
+Vector_Sqrt
+
+	Does sqrt on each element of input vector
+====================
+*/
 void Vector_Sqrt( void * const vector, const void * const input ) {
 	VEC4_CAST( vector )->x = Maths_Sqrt( VEC4_CAST( input )->x );
 	VEC4_CAST( vector )->y = Maths_Sqrt( VEC4_CAST( input )->y );
@@ -538,6 +694,13 @@ void Vector_Sqrt( void * const vector, const void * const input ) {
 	VEC4_CAST( vector )->w = Maths_Sqrt( VEC4_CAST( input )->w );
 }
 
+/*
+====================
+Vector_InverseSqrt
+
+	Does inverse sqrt on each element of input vector
+====================
+*/
 void Vector_InverseSqrt( void * const vector, const void * const input ) {
 	VEC4_CAST( vector )->x = Maths_InvSqrt( VEC4_CAST( input )->x );
 	VEC4_CAST( vector )->y = Maths_InvSqrt( VEC4_CAST( input )->y );
@@ -545,6 +708,13 @@ void Vector_InverseSqrt( void * const vector, const void * const input ) {
 	VEC4_CAST( vector )->w = Maths_InvSqrt( VEC4_CAST( input )->w );
 }
 
+/*
+====================
+Vector_Log
+
+	Takes the log of each component of input vector
+====================
+*/
 void Vector_Log( void * const vector, const void * const input ) {
 	VEC4_CAST( vector )->x = Maths_Log( VEC4_CAST( input )->x );
 	VEC4_CAST( vector )->y = Maths_Log( VEC4_CAST( input )->y );

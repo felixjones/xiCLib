@@ -46,9 +46,8 @@ typedef struct mat2_s {
 
 void	Matrix_Clear( void * const matrix );
 void	Matrix_ToFloatPtr( const void * const matrix, float * const floatPtr, const size_t length );
-
 void	Matrix_Mul( void * const matrix, const void * const left, const void * const right, const size_t length );
-float	Matrix_Determinant( const void * const matrix, const size_t length );
 void	Matrix_Inverse( void * const matrix, const void * const input, const size_t length );
+float	Matrix_Determinant( const void * const matrix, const size_t length );
 
 #endif
