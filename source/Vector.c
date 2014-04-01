@@ -84,12 +84,12 @@ Vector_MulMatrix
 void Vector_MulMatrix( void * const vector, const void * const input, const void * const matrix, const size_t length ) {
 	const float * const vecFloat = ( const float * )input;
 	const float * const matFloat = ( const float * )matrix;
-
 	vec4_t resVec;
-	Vector_Clear( &resVec );
 	float * const resFloat = ( float * )&resVec;
-
 	size_t ii = length - 1;
+
+	Vector_Clear( &resVec );
+
 	do {
 		float sum = 0.0f;
 		size_t kk = length - 1;
@@ -179,6 +179,7 @@ Vector_MinFloat
 */
 void Vector_MinFloat( void * const vector, const void * const left, const float right ) {
 	const vec4_t rightVec = { right, right, right, right };
+
 	Vector_Min( vector, left, &rightVec );
 }
 
@@ -192,6 +193,7 @@ Vector_MaxFloat
 */
 void Vector_MaxFloat( void * const vector, const void * const left, const float right ) {
 	const vec4_t rightVec = { right, right, right, right };
+
 	Vector_Max( vector, left, &rightVec );
 }
 
@@ -205,6 +207,7 @@ Vector_ClampFloat
 void Vector_ClampFloat( void * const vector, const void * const input, const float min, const float max ) {
 	const vec4_t minVec = { min, min, min, min };
 	const vec4_t maxVec = { max, max, max, max };
+
 	Vector_Clamp( vector, input, &minVec, &maxVec );
 }
 
@@ -218,6 +221,7 @@ Vector_MixFloat
 */
 void Vector_MixFloat( void * const vector, const void * const left, const void * const right, const float mixer ) {
 	const vec4_t mixVec = { mixer, mixer, mixer, mixer };
+
 	Vector_Mix( vector, left, right, &mixVec );
 }
 
@@ -277,6 +281,7 @@ Vector_Distance
 */
 float Vector_Distance( const void * const left, const void * const right, const size_t length ) {
 	vec4_t vector;
+
 	Vector_Sub( &vector, left, right );
 
 	return Vector_Length( &vector, length );
@@ -326,8 +331,8 @@ Vector_Reflect
 */
 void Vector_Reflect( void * const vector, const void * const i, const void * const n, const size_t length ) {
 	const float doubleDot = 2.0f * Vector_Dot( n, i, length );
-	
 	vec4_t doubleVec;
+
 	doubleVec.x = VEC4_CAST( n )->x * doubleDot;
 	doubleVec.y = ( length < VEC2 ? 0.0f : VEC4_CAST( n )->y * doubleDot );
 	doubleVec.z = ( length < VEC3 ? 0.0f : VEC4_CAST( n )->z * doubleDot );
@@ -354,14 +359,14 @@ void Vector_Refract( void * const vector, const void * const i, const void * con
 		Vector_Clear( vector );
 	} else {
 		const float rVS = ( r * nDi + Maths_Sqrt( d ) );
-		
 		vec4_t riVec;
+		vec4_t rVSVec;
+
 		riVec.x = VEC4_CAST( i )->x * r;
 		riVec.y = ( length < VEC2 ? 0.0f : VEC4_CAST( i )->y * r );
 		riVec.z = ( length < VEC3 ? 0.0f : VEC4_CAST( i )->z * r );
 		riVec.w = ( length < VEC4 ? 0.0f : VEC4_CAST( i )->w * r );
 		
-		vec4_t rVSVec;
 		rVSVec.x = VEC4_CAST( n )->x * rVS;
 		rVSVec.y = ( length < VEC2 ? 0.0f : VEC4_CAST( n )->y * rVS );
 		rVSVec.z = ( length < VEC3 ? 0.0f : VEC4_CAST( n )->z * rVS );
@@ -453,48 +458,6 @@ void Vector_ATan( void * const vector, const void * const input ) {
 	VEC4_CAST( vector )->w = Maths_ATan( VEC4_CAST( input )->w );
 }
 
-void Vector_SinH( void * const vector, const void * const input ) {
-	VEC4_CAST( vector )->x = Maths_SinH( VEC4_CAST( input )->x );
-	VEC4_CAST( vector )->y = Maths_SinH( VEC4_CAST( input )->y );
-	VEC4_CAST( vector )->z = Maths_SinH( VEC4_CAST( input )->z );
-	VEC4_CAST( vector )->w = Maths_SinH( VEC4_CAST( input )->w );
-}
-
-void Vector_CosH( void * const vector, const void * const input ) {
-	VEC4_CAST( vector )->x = Maths_CosH( VEC4_CAST( input )->x );
-	VEC4_CAST( vector )->y = Maths_CosH( VEC4_CAST( input )->y );
-	VEC4_CAST( vector )->z = Maths_CosH( VEC4_CAST( input )->z );
-	VEC4_CAST( vector )->w = Maths_CosH( VEC4_CAST( input )->w );
-}
-
-void Vector_TanH( void * const vector, const void * const input ) {
-	VEC4_CAST( vector )->x = Maths_TanH( VEC4_CAST( input )->x );
-	VEC4_CAST( vector )->y = Maths_TanH( VEC4_CAST( input )->y );
-	VEC4_CAST( vector )->z = Maths_TanH( VEC4_CAST( input )->z );
-	VEC4_CAST( vector )->w = Maths_TanH( VEC4_CAST( input )->w );
-}
-
-void Vector_ASinH( void * const vector, const void * const input ) {
-	VEC4_CAST( vector )->x = Maths_ASinH( VEC4_CAST( input )->x );
-	VEC4_CAST( vector )->y = Maths_ASinH( VEC4_CAST( input )->y );
-	VEC4_CAST( vector )->z = Maths_ASinH( VEC4_CAST( input )->z );
-	VEC4_CAST( vector )->w = Maths_ASinH( VEC4_CAST( input )->w );
-}
-
-void Vector_ACosH( void * const vector, const void * const input ) {
-	VEC4_CAST( vector )->x = Maths_ACosH( VEC4_CAST( input )->x );
-	VEC4_CAST( vector )->y = Maths_ACosH( VEC4_CAST( input )->y );
-	VEC4_CAST( vector )->z = Maths_ACosH( VEC4_CAST( input )->z );
-	VEC4_CAST( vector )->w = Maths_ACosH( VEC4_CAST( input )->w );
-}
-
-void Vector_ATanH( void * const vector, const void * const input ) {
-	VEC4_CAST( vector )->x = Maths_ATanH( VEC4_CAST( input )->x );
-	VEC4_CAST( vector )->y = Maths_ATanH( VEC4_CAST( input )->y );
-	VEC4_CAST( vector )->z = Maths_ATanH( VEC4_CAST( input )->z );
-	VEC4_CAST( vector )->w = Maths_ATanH( VEC4_CAST( input )->w );
-}
-
 void Vector_Pow( void * const vector, const void * const input, const void * const powerof ) {
 	VEC4_CAST( vector )->x = Maths_Pow( VEC4_CAST( input )->x, VEC4_CAST( powerof )->x );
 	VEC4_CAST( vector )->y = Maths_Pow( VEC4_CAST( input )->y, VEC4_CAST( powerof )->y );
@@ -507,13 +470,6 @@ void Vector_Exp( void * const vector, const void * const input ) {
 	VEC4_CAST( vector )->y = Maths_Exp( VEC4_CAST( input )->y );
 	VEC4_CAST( vector )->z = Maths_Exp( VEC4_CAST( input )->z );
 	VEC4_CAST( vector )->w = Maths_Exp( VEC4_CAST( input )->w );
-}
-
-void Vector_Exp2( void * const vector, const void * const input ) {
-	VEC4_CAST( vector )->x = Maths_Exp2( VEC4_CAST( input )->x );
-	VEC4_CAST( vector )->y = Maths_Exp2( VEC4_CAST( input )->y );
-	VEC4_CAST( vector )->z = Maths_Exp2( VEC4_CAST( input )->z );
-	VEC4_CAST( vector )->w = Maths_Exp2( VEC4_CAST( input )->w );
 }
 
 void Vector_FMA( void * const vector, const void * const a, const void * const b, const void * const c ) {
@@ -594,11 +550,4 @@ void Vector_Log( void * const vector, const void * const input ) {
 	VEC4_CAST( vector )->y = Maths_Log( VEC4_CAST( input )->y );
 	VEC4_CAST( vector )->z = Maths_Log( VEC4_CAST( input )->z );
 	VEC4_CAST( vector )->w = Maths_Log( VEC4_CAST( input )->w );
-}
-
-void Vector_Log2( void * const vector, const void * const input ) {
-	VEC4_CAST( vector )->x = Maths_Log2( VEC4_CAST( input )->x );
-	VEC4_CAST( vector )->y = Maths_Log2( VEC4_CAST( input )->y );
-	VEC4_CAST( vector )->z = Maths_Log2( VEC4_CAST( input )->z );
-	VEC4_CAST( vector )->w = Maths_Log2( VEC4_CAST( input )->w );
 }

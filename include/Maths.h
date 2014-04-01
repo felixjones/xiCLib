@@ -35,18 +35,8 @@ float	Maths_ASin( const float arc );
 float	Maths_ACos( const float arc );
 float	Maths_ATan( const float arc );
 
-float	Maths_SinH( const float radian );
-float	Maths_CosH( const float radian );
-float	Maths_TanH( const float radian );
-
-float	Maths_ASinH( const float arc );
-float	Maths_ACosH( const float arc );
-float	Maths_ATanH( const float arc );
-
 float	Maths_Pow( const float number, const float power );
 float	Maths_Exp( const float number );
-float	Maths_Exp2( const float number );
 float	Maths_Log( const float number );
-float	Maths_Log2( const float number );
 
 #endif

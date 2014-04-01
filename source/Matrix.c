@@ -1,6 +1,6 @@
 #include "Matrix.h"
 
-#include <Maths.h>
+#include "Maths.h"
 #include <string.h>
 
 #define MAT4_CAST( X )	( ( mat4_t * )X )
@@ -40,12 +40,12 @@ Matrix_Mul
 void Matrix_Mul( void * const matrix, const void * const left, const void * const right, const size_t length ) {
 	const float * const leftFloat = ( const float * )left;
 	const float * const rightFloat = ( const float * )right;
-
 	mat4_t resMat;
-	Matrix_Clear( &resMat );
 	float * const resFloat = ( float * )&resMat;
-
 	size_t ii = length - 1;
+
+	Matrix_Clear( &resMat );
+
 	do {
 		size_t jj = length - 1;
 
@@ -101,13 +101,15 @@ float Matrix_Determinant( const void * const matrix, const size_t length ) {
 }
 
 void Matrix_Inverse( void * const matrix, const void * const input, const size_t length ) {
+	mat4_t temp;
+
+	if ( length < MAT4 ) {
+		memcpy( &temp, input, sizeof( mat4_t ) );
+	}
+
 	if ( length == MAT2 ) {
 		
-		mat4_t temp;
-		memcpy( &temp, input, sizeof( mat4_t ) );
-
 		const float oneOverDeterminant = SAFE_DIV( 1.0f, Matrix_Determinant( &temp, length ) );
-
 		const float xx = temp.x.x;
 		const float yy = temp.y.y;
 
@@ -115,12 +117,9 @@ void Matrix_Inverse( void * const matrix, const void * const input, const size_t
 		MAT4_CAST( matrix )->x.y = -temp.x.y * oneOverDeterminant;
 		MAT4_CAST( matrix )->y.x = -temp.y.x * oneOverDeterminant;
 		MAT4_CAST( matrix )->y.y = xx * oneOverDeterminant;
-
+		
 	} else if ( length == MAT3 ) {
 		
-		mat4_t temp;
-		memcpy( &temp, input, sizeof( mat4_t ) );
-
 		const float oneOverDeterminant = SAFE_DIV( 1.0f, Matrix_Determinant( &temp, length ) );
 
 		MAT4_CAST( matrix )->x.x =  ( temp.y.y * temp.z.z - temp.z.y * temp.y.z ) * oneOverDeterminant;
@@ -134,9 +133,11 @@ void Matrix_Inverse( void * const matrix, const void * const input, const size_t
 		MAT4_CAST( matrix )->z.z =  ( temp.x.x * temp.y.y - temp.y.x * temp.x.y ) * oneOverDeterminant;
 		
 	} else if ( length == MAT4 ) {
-		const float * const m = ( const float * )input;
 
-		float inv[16], det;
+		const float * const m = ( const float * )input;
+		float inv[16];
+		float det;
+		size_t ii = 15;
 
 		inv[0] =    m[5]  * m[10] * m[15] - 
 					m[5]  * m[11] * m[14] - 
@@ -254,9 +255,9 @@ void Matrix_Inverse( void * const matrix, const void * const input, const size_t
 		
 		det = SAFE_DIV( 1.0f, det );
 
-		size_t ii = 15;
 		do {
 			( ( float * )matrix )[ii] = inv[ii] * det;
 		} while ( ii-- );
+
 	}
 }

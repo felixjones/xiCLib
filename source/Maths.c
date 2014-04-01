@@ -19,21 +19,43 @@ static float tanTable[LOOKUP_LEN];
 static float asinTable[LOOKUP_LEN];
 static float acosTable[LOOKUP_LEN];
 static float atanTable[LOOKUP_LEN];
-static float sinhTable[LOOKUP_LEN];
-static float coshTable[LOOKUP_LEN];
-static float tanhTable[LOOKUP_LEN];
-static float asinhTable[LOOKUP_LEN];
-static float acoshTable[LOOKUP_LEN];
-static float atanhTable[LOOKUP_LEN];
 
-inline static float Trig( const float number, const size_t index, float ( * Func_f )( float ), float * const table ) {
+typedef enum trigFunc_e {
+	TRIG_SIN,
+	TRIG_COS,
+	TRIG_TAN,
+	TRIG_ASIN,
+	TRIG_ACOS,
+	TRIG_ATAN
+} trigFunc_t;
+
+inline static float Trig( const float number, const size_t index, const trigFunc_t trigFunc, float * const table ) {
 	float * const val = &table[index];
 
 	if ( *val ) {
 		return *val;
 	}
 
-	*val = Func_f( number );
+	switch ( trigFunc ) {
+	case TRIG_SIN:
+		*val = sinf( number );
+		break;
+	case TRIG_COS:
+		*val = cosf( number );
+		break;
+	case TRIG_TAN:
+		*val = tanf( number );
+		break;
+	case TRIG_ASIN:
+		*val = asinf( number );
+		break;
+	case TRIG_ACOS:
+		*val = acosf( number );
+		break;
+	case TRIG_ATAN:
+		*val = atanf( number );
+		break;
+	}
 
 	if ( ( *val ) * ( *val ) > 0.0f ) {
 		return *val;
@@ -106,27 +128,27 @@ float Maths_Sqrt( const float number ) {
 }
 
 float Maths_Sin( const float radian ) {
-	return Trig( radian, TableIndex( radian ), &sinf, &sinTable[0] );
+	return Trig( radian, TableIndex( radian ), TRIG_SIN, &sinTable[0] );
 }
 
 float Maths_Cos( const float radian ) {
-	return Trig( radian, TableIndex( radian ), &cosf, &cosTable[0] );
+	return Trig( radian, TableIndex( radian ), TRIG_COS, &cosTable[0] );
 }
 
 float Maths_Tan( const float radian ) {
-	return Trig( radian, TableIndex( radian ), &tanf, &tanTable[0] );
+	return Trig( radian, TableIndex( radian ), TRIG_TAN, &tanTable[0] );
 }
 
 float Maths_ASin( const float arc ) {
-	return Trig( arc, ArcIndex( arc ), &asinf, &asinTable[0] );
+	return Trig( arc, ArcIndex( arc ), TRIG_ASIN, &asinTable[0] );
 }
 
 float Maths_ACos( const float arc ) {
-	return Trig( arc, ArcIndex( arc ), &acosf, &acosTable[0] );
+	return Trig( arc, ArcIndex( arc ), TRIG_ACOS, &acosTable[0] );
 }
 
 float Maths_ATan( const float arc ) {
-	return Trig( arc, ArcIndex( arc ), &atanf, &atanTable[0] );
+	return Trig( arc, ArcIndex( arc ), TRIG_ATAN, &atanTable[0] );
 }
 
 float Maths_SinH( const float radian ) {
@@ -144,21 +166,6 @@ float Maths_TanH( const float radian ) {
 	//return Trig( radian, TableIndex( radian ), &tanhf, &tanhTable[0] );
 }
 
-float Maths_ASinH( const float arc ) {
-	return asinhf( arc );
-	//return Trig( arc, TableIndex( arc ), &asinhf, &asinhTable[0] );
-}
-
-float Maths_ACosH( const float arc ) {
-	return acoshf( arc );
-	//return Trig( arc, TableIndex( arc ), &acoshf, &acoshTable[0] );
-}
-
-float Maths_ATanH( const float arc ) {
-	return atanhf( arc );
-	//return Trig( arc, TableIndex( arc ), &atanhf, &atanhTable[0] );
-}
-
 float Maths_Pow( const float number, const float power ) {
 	return powf( number, power );
 }
@@ -167,14 +174,6 @@ float Maths_Exp( const float number ) {
 	return expf( number );
 }
 
-float Maths_Exp2( const float number ) {
-	return exp2f( number );
-}
-
 float Maths_Log( const float number ) {
-	return log( number );
-}
-
-float Maths_Log2( const float number ) {
-	return log2( number );
+	return logf( number );
 }
